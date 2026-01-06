@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kook-Kik Fusion Kitchen 🍳✨</title>
+    <title>Global Fusion Kitchen (Cute Ver.) 🌎🍳</title>
     <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&family=Kodchasan:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fff0f5; 
+            --bg-color: #fff0f5; /* Lavender Blush */
             --card-bg: #ffffff;
-            --primary: #ffb7b2; 
-            --secondary: #aec6cf; 
-            --accent: #ffdac1; 
+            --primary: #ffb7b2; /* Pastel Red/Pink */
+            --secondary: #aec6cf; /* Pastel Blue */
+            --accent: #ffdac1; /* Pastel Orange */
             --text: #6d6d6d;
             --border-radius: 25px;
             --shadow: 0 8px 20px rgba(174, 198, 207, 0.4);
@@ -20,7 +20,7 @@
         body {
             font-family: 'Mali', cursive;
             background-color: var(--bg-color);
-            background-image: radial-gradient(#ffb7b2 10%, transparent 11%), radial-gradient(#aec6cf 10%, transparent 11%);
+            background-image: radial-gradient(#ffb7b2 15%, transparent 16%), radial-gradient(#aec6cf 15%, transparent 16%);
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
             color: var(--text);
@@ -33,46 +33,61 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 950px;
             width: 100%;
             text-align: center;
         }
 
+        /* Header Style */
         h1 {
             background: #fff;
             color: #ff8b94;
-            font-size: 2.5rem;
-            padding: 20px 40px;
+            font-size: 2.2rem;
+            padding: 15px 40px;
             border-radius: 50px;
             display: inline-block;
             border: 5px solid #ffdac1;
             box-shadow: var(--shadow);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             position: relative;
         }
+        
+        h1::after {
+            content: "✨";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 2rem;
+        }
 
+        /* Grid Layout */
         .grid-wrapper {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
+            gap: 20px;
             margin-bottom: 30px;
         }
 
+        /* Card Style */
         .slot-card {
             background: var(--card-bg);
             border-radius: var(--border-radius);
             padding: 20px;
             border: 3px solid #fff;
             box-shadow: var(--shadow);
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             display: flex;
             flex-direction: column;
             gap: 12px;
             position: relative;
         }
 
-        .slot-card:hover { transform: translateY(-5px); border-color: var(--secondary); }
-        
+        .slot-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary);
+        }
+
+        /* Locked State */
         .slot-card.locked {
             border: 3px solid #ffb7b2;
             background-color: #fff9f9;
@@ -88,8 +103,10 @@
             font-weight: 700;
             color: #84a9ac;
             font-size: 1.1rem;
+            text-align: left;
         }
 
+        /* Lock Button */
         .lock-btn {
             background: #f0f0f0;
             border: none;
@@ -98,19 +115,33 @@
             height: 35px;
             cursor: pointer;
             transition: 0.2s;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .slot-card.locked .lock-btn { background: #ffb7b2; color: white; }
 
+        .slot-card.locked .lock-btn {
+            background: #ffb7b2;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Dropdown */
         select {
             width: 100%;
             padding: 10px;
             border: 2px solid #eee;
             border-radius: 15px;
             font-family: 'Kodchasan', sans-serif;
+            color: var(--text);
+            background-color: #fafafa;
             outline: none;
-            background: #fafafa;
+            cursor: pointer;
         }
+        select:focus { border-color: var(--secondary); }
 
+        /* Display Box */
         .display-value {
             background-color: #e3f2fd;
             border-radius: 15px;
@@ -122,15 +153,18 @@
             align-items: center;
             justify-content: center;
             font-size: 1.1rem;
+            text-align: center;
             border: 2px dashed #bbdefb;
+            word-break: break-word;
         }
+
         .slot-card.locked .display-value {
             background-color: #ffebee;
             border-color: #ffcdd2;
             color: #c62828;
         }
 
-        /* ส่วนแสดงผลลัพธ์ */
+        /* Result Area */
         .result-box {
             background: #fff;
             border-radius: 30px;
@@ -141,20 +175,23 @@
         }
 
         #finalSentence {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             line-height: 1.8;
             color: #5d5d5d;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .highlight {
+            background: linear-gradient(120deg, #ffd1dc 0%, #ffd1dc 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 88%;
+            font-weight: bold;
             color: #d84315;
-            background: #ffd1dc;
             padding: 0 5px;
-            border-radius: 5px;
         }
 
-        /* Text Area สำหรับ Copy */
+        /* Copy Text Area (Hidden by default) */
         #copyArea {
             width: 100%;
             height: 100px;
@@ -162,12 +199,12 @@
             border-radius: 15px;
             border: 2px dashed #aec6cf;
             font-family: 'Kodchasan', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: #666;
             resize: none;
             background: #f9fcff;
-            display: none; /* ซ่อนไว้ก่อน */
-            margin-bottom: 15px;
+            display: none;
+            margin-top: 10px;
         }
         #copyArea:focus { outline: none; border-color: var(--primary); }
 
@@ -188,25 +225,27 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
-            color: white;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             gap: 8px;
+            color: white;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.1);
         }
         .main-btn:active { transform: translateY(4px); box-shadow: none; }
 
         .spin-btn { background: linear-gradient(to right, #ff9a9e, #fad0c4); }
-        .spin-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 rgba(0,0,0,0.15); }
+        .spin-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 0 rgba(0,0,0,0.15); }
 
         .reset-btn { background: #eeeeee; color: #888; }
+        .reset-btn:hover { background: #e0e0e0; }
         
         .copy-btn { 
             background: linear-gradient(to right, #4facfe, #00f2fe); 
-            display: none; /* ซ่อนปุ่ม Copy ไว้ก่อน */
+            display: none; /* ซ่อนก่อนสุ่ม */
         }
+        .copy-btn:hover { transform: translateY(-3px); }
 
-        /* Toast Popup (แจ้งเตือนตอน Copy) */
+        /* Toast Notification */
         #toast {
             visibility: hidden;
             min-width: 250px;
@@ -221,24 +260,21 @@
             bottom: 30px;
             transform: translateX(-50%);
             font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             opacity: 0;
             transition: opacity 0.5s, bottom 0.5s;
         }
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            bottom: 50px;
-        }
+        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
 
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>🌎 ครัวฟิวชั่นกุ๊กกิ๊ก 🍳</h1>
+        <h1>🌎 Global Fusion Kitchen 🍳</h1>
 
-        <div class="grid-wrapper" id="gridContainer"></div>
+        <div class="grid-wrapper" id="gridContainer">
+            </div>
 
         <div class="result-box">
             <div id="finalSentence">✨ กดปุ่ม <b style="color:#ff8b94">"สุ่มเมนูฟิวชั่น"</b> เพื่อเริ่มสร้างสรรค์! ✨</div>
@@ -246,50 +282,74 @@
         </div>
 
         <div class="btn-group">
-            <button class="main-btn reset-btn" onclick="unlockAll()">🔓 ปลดล็อก</button>
-            <button class="main-btn spin-btn" onclick="spinAll()">🎲 สุ่มเมนู (Spin)</button>
-            <button class="main-btn copy-btn" id="btnCopy" onclick="copyText()">📋 คัดลอกข้อความ</button>
+            <button class="main-btn reset-btn" onclick="unlockAll()">🔓 ปลดล็อกทั้งหมด</button>
+            <button class="main-btn spin-btn" onclick="spinAll()">🎲 สุ่มเมนูฟิวชั่น (Spin)</button>
+            <button class="main-btn copy-btn" id="btnCopy" onclick="copyText()">📋 คัดลอกโจทย์</button>
         </div>
     </div>
 
-    <div id="toast">✅ คัดลอกเรียบร้อย! พร้อมวางแล้วจ้า</div>
+    <div id="toast">✅ คัดลอกเรียบร้อย! พร้อมปรุงแล้วจ้า</div>
 
     <script>
-        // --- DATA ---
-        const countryList = ["Italy", "Greece", "Peru", "Portugal", "Spain", "Japan", "Türkiye", "China", "France", "Indonesia", "Mexico", "India", "Poland", "USA", "Vietnam", "Brazil", "South Korea", "Thailand", "Germany", "Russia", "Malaysia", "Egypt", "UK", "Sweden", "Laos", "Singapore", "Myanmar", "Cambodia"];
-
+        // --- DATA SETS (ข้อมูลเดิมเป๊ะๆ) ---
         const data = {
-            meat: ["🐔 อกไก่", "🍗 น่องไก่", "🐖 หมูกรอบ", "🐷 สันคอหมู", "🦐 กุ้งแม่น้ำ", "🦞 กุ้งมังกร", "🦆 อกเป็ด", "🐚 หอยเชลล์", "🦀 ปูม้า", "🦑 หมึกสาย", "🐟 ปลาแซลมอน", "🐟 ปลากะพง", "🍄 เห็ดรวม", "🧀 เต้าหู้"],
-            style: ["🍜 สตรีทฟู้ด", "🥘 ฟิวชั่น", "🍢 ปิ้งย่าง", "🍛 แกงกะหรี่/ราดข้าว", "🍵 ซุปหม้อไฟ", "🍳 อาหารเช้า", "🍽️ ไฟน์ไดนิ่ง", "🌶️ ยำแซ่บ", "🍝 พาสต้า", "🥗 สลัด"],
-            plating: ["🎨 Minimalist", "🌸 โรยดอกไม้", "🥔 กรุบกรอบ", "⚫ หยดซอส", "🗼 ทรงสูง", "🧩 แยกส่วน", "🏡 บ้านทุ่ง", "🍱 ใส่กล่อง", "🌿 ใบตอง", "🥣 ใส่ชาม"]
+            country1: [
+                "Italy", "Greece", "Peru", "Portugal", "Spain", "Japan", "Türkiye", "China", "France", "Indonesia", "Mexico", "Serbia", "India", "Poland", "United States", "Vietnam", "Brazil", "Croatia", "South Korea", "Lebanon", "Georgia", "Hungary", "Colombia", "Thailand", "Philippines", "Argentina", "Germany", "Russia", "Malaysia", "Morocco", "Romania", "Chile", "Czechia", "South Africa", "Bulgaria", "Austria", "Palestine", "Egypt", "Ethiopia", "Canada", "Tunisia", "Iran", "Ukraine", "Lithuania", "Syria", "Algeria", "Netherlands", "Saudi Arabia", "Ecuador", "England", "Sweden", "Bosnia and Herzegovina", "North Macedonia", "Venezuela", "Denmark", "Trinidad and Tobago", "Nicaragua", "Puerto Rico", "Libya", "Bangladesh", "Australia", "Sri Lanka", "Finland", "Jordan", "Bolivia", "Norway", "Azerbaijan", "Belgium", "Cuba", "Switzerland", "Iraq", "Uruguay", "Pakistan", "Afghanistan", "Slovakia", "Eritrea", "Albania", "Scotland", "Belarus", "Ireland", "Haiti", "Dominican Republic", "Paraguay", "Slovenia", "Costa Rica", "The Bahamas", "Armenia", "Latvia", "Estonia", "Singapore", "Montenegro", "Guatemala", "Israel", "Malta", "Nigeria", "Laos", "Kenya", "Kazakhstan", "Qatar", "Cyprus"
+            ],
+            
+            country2: [
+                "Italy", "Greece", "Peru", "Portugal", "Spain", "Japan", "Türkiye", "China", "France", "Indonesia", "Mexico", "Serbia", "India", "Poland", "United States", "Vietnam", "Brazil", "Croatia", "South Korea", "Lebanon", "Georgia", "Hungary", "Colombia", "Thailand", "Philippines", "Argentina", "Germany", "Russia", "Malaysia", "Morocco", "Romania", "Chile", "Czechia", "South Africa", "Bulgaria", "Austria", "Palestine", "Egypt", "Ethiopia", "Canada", "Tunisia", "Iran", "Ukraine", "Lithuania", "Syria", "Algeria", "Netherlands", "Saudi Arabia", "Ecuador", "England", "Sweden", "Bosnia and Herzegovina", "North Macedonia", "Venezuela", "Denmark", "Trinidad and Tobago", "Nicaragua", "Puerto Rico", "Libya", "Bangladesh", "Australia", "Sri Lanka", "Finland", "Jordan", "Bolivia", "Norway", "Azerbaijan", "Belgium", "Cuba", "Switzerland", "Iraq", "Uruguay", "Pakistan", "Afghanistan", "Slovakia", "Eritrea", "Albania", "Scotland", "Belarus", "Ireland", "Haiti", "Dominican Republic", "Paraguay", "Slovenia", "Costa Rica", "The Bahamas", "Armenia", "Latvia", "Estonia", "Singapore", "Montenegro", "Guatemala", "Israel", "Malta", "Nigeria", "Laos", "Kenya", "Kazakhstan", "Qatar", "Cyprus"
+            ],
+
+            meat: [
+                "🐔 อกไก่", "🍗 น่องไก่", "🐓 ปีกไก่", "🦶 ตีนไก่", "🧣 คอไก่", "🥩 สันในไก่", "🍢 ตับไก่", "❤️ หัวใจไก่", "🥘 กระเพาะไก่", "🥓 หนังไก่",
+                "🐷 สันในหมู", "🐖 สันนอกหมู", "🥓 หมูกรอบ", "🥩 เนื้อสะโพกหมู", "🥣 เนื้อหมูบด", "🍖 หมูบาร์บีคิว", "🥣 หมูหมัก", "🍢 ตับหมู", "❤️ หัวใจหมู", "🥩 กระเพาะหมู", "🥓 หนังหมู", "🦴 กระดูกหมู",
+                "🦐 กุ้งขาว", "🦐 กุ้งแม่น้ำ", "🍤 กุ้งลายเสือ", "🌊 กุ้งทะเล", "🇦🇺 กุ้งออสเตรเลีย", "🦞 กุ้งมังกร", "🔴 กุ้งแดง", "💎 กุ้งแก้ว", "🦐 กุ้งก้ามกราม",
+                "🦆 อกเป็ด", "🍗 น่องเป็ด", "🥩 สะโพกเป็ด", "🍢 ตับเป็ด", "🥓 หนังเป็ด", "🍑 หางเป็ด",
+                "🐚 หอยเป๋าฮื้อ", "🦪 หอยนางรม", "🐚 หอยแมลงภู่", "🥘 หอยกาบ", "🐚 หอยลาย", "🩸 หอยแครง", "🥘 หอยปีกนก", "🇯🇵 หอยแมลงภู่ญี่ปุ่น",
+                "🦀 ปูทะเล", "🦀 ปูอลาสก้า", "🦀 ปูม้า","🦀 ปู",
+                "🦑 หมึกกล้วย", "🐙 ปลาหมึก", "🐢 หมึกกระดอง", "🦑 หมึกสาย","🦑 หมึกหอม",
+                "🐟 ปลาทู", "🇯🇵 ปลาซาบะ", "🐟 ปลากะพงขาว", "🐟 ปลานิล", "🐟 ปลาสวาย", "🐟 ปลาอินทรี","🐟 ปลากราย", "🍣 ปลาแซลมอน", "🐟 ปลาทูน่า", "🐟 ปลาฮามาจิ", "🐟 ปลาสำลี", "🐟 ปลาทับทิม",
+                "🥘 หัวปลา", "🥚 ไข่ปลา", "🥓 พุงปลา"
+            ],
+
+            style: [
+                "🍜 สตรีทฟู้ด", "🥘 ฟิวชั่น", "🍢 ปิ้งย่าง", "🍛 อาหารจานเดียว", "🍵 ซุป", "🍳 อาหารเช้า", "🍽️ ไฟน์ไดนิ่ง", "🍟 ฟาสต์ฟู้ด", "🍂 อาหารตามสั่ง", "🥦 อาหารสุขภาพ", "🍰 ของหวาน", "🥗 อาหารมังสวิรัติ", "🍱 บุฟเฟ่ต์", "🍸 ค็อกเทล", "🍰 คาเฟ่"
+            ],
+
+            plating: [
+                "🎨 Minimalist Plating", "🖼️ Artistic Plating", "🏺 Traditional Plating", "🥞 Stacking", "📐 Asymmetrical Plating", "🌱  Nature-Inspired Plating", "🌸 Edible Flowers", "🌿 Circular Plating", "🥔 Crisps & Chips", "🎨 Sauce Splatters", "〰️ Sauce Swirls", "⚫ Sauce Dots", "🗼 Towering (หอคอย)", "🧩 Deconstructed (แยกส่วน)", "🗿 Food Sculpture", "🎮 Play with textures", "⬆️ Vertical Plating", "🖌 Monochromatic", "🎮 Interactive Plating", "🌈 Plating by Color", "👼 Smaller portion sizes/Odd Quantities", "🏡 Rustic Plating", "🌡️ Color & Contrast"
+            ]
         };
 
+        // UI Configuration
         const config = [
-            { id: "country1", label: "🗺️ ประเทศหลัก", data: countryList },
-            { id: "country2", label: "🌎 ประเทศรอง", data: countryList },
-            { id: "meat", label: "🥩 วัตถุดิบ", data: data.meat },
-            { id: "style", label: "🍳 สไตล์", data: data.style },
-            { id: "plating", label: "🎨 จัดจาน", data: data.plating }
+            { id: "country1", label: "🗺️ ประเทศตั้งต้น (Base)", data: data.country1 },
+            { id: "country2", label: "🌎 ประเทศที่ 2 (Fusion)", data: data.country2 },
+            { id: "meat", label: "🥩 วัตถุดิบหลัก (Meat)", data: data.meat },
+            { id: "style", label: "🍳 สไตล์ (Style)", data: data.style },
+            { id: "plating", label: "🎨 การจัดจาน (Plating)", data: data.plating }
         ];
 
         let state = {};
 
+        // Initialize
         function init() {
             const container = document.getElementById('gridContainer');
             config.forEach(cfg => {
                 state[cfg.id] = { locked: false, value: "..." };
+
                 const card = document.createElement('div');
                 card.className = "slot-card";
                 card.id = `card-${cfg.id}`;
-                const options = cfg.data.map(item => `<option value="${item}">${item}</option>`).join('');
                 card.innerHTML = `
                     <div class="header-row">
                         <span class="label">${cfg.label}</span>
-                        <button class="lock-btn" id="lock-${cfg.id}" onclick="toggleLock('${cfg.id}')">🔓</button>
+                        <button class="lock-btn" id="lock-${cfg.id}" onclick="toggleLock('${cfg.id}')" title="กดเพื่อล็อก/ปลดล็อก">🔓</button>
                     </div>
                     <select id="select-${cfg.id}" onchange="handleSelect('${cfg.id}')">
-                        <option value="random">🎲 สุ่ม</option>
-                        ${options}
+                        <option value="random">🎲 สุ่ม (Random)</option>
+                        ${cfg.data.map(item => `<option value="${item}">${item}</option>`).join('')}
                     </select>
                     <div class="display-value" id="disp-${cfg.id}">...</div>
                 `;
@@ -297,122 +357,156 @@
             });
         }
 
+        // Toggle Lock
         function toggleLock(id) {
             state[id].locked = !state[id].locked;
+            updateLockUI(id);
+        }
+
+        function updateLockUI(id) {
             const btn = document.getElementById(`lock-${id}`);
             const card = document.getElementById(`card-${id}`);
             const select = document.getElementById(`select-${id}`);
-            
+
             if (state[id].locked) {
-                btn.innerText = "🔒"; card.classList.add('locked');
+                btn.innerText = "🔒";
+                card.classList.add('locked');
+                // ถ้าล็อกขณะที่ยังเป็น "..." หรือ random ให้สุ่มค่าแรกมาใส่เลยเพื่อความสวยงาม
                 if (select.value === 'random' && state[id].value === '...') {
-                     const val = config.find(c => c.id === id).data[0];
-                     state[id].value = val; document.getElementById(`disp-${id}`).innerText = val; select.value = val;
+                     const pool = config.find(c => c.id === id).data;
+                     const randomVal = pool[Math.floor(Math.random() * pool.length)];
+                     state[id].value = randomVal;
+                     document.getElementById(`disp-${id}`).innerText = randomVal;
+                     select.value = randomVal;
                 }
             } else {
-                btn.innerText = "🔓"; card.classList.remove('locked');
+                btn.innerText = "🔓";
+                card.classList.remove('locked');
             }
         }
 
+        // Handle Select Dropdown
         function handleSelect(id) {
             const select = document.getElementById(`select-${id}`);
+            const display = document.getElementById(`disp-${id}`);
             const val = select.value;
+
             if (val !== "random") {
                 state[id].value = val;
-                document.getElementById(`disp-${id}`).innerText = val;
-                if (!state[id].locked) toggleLock(id);
+                display.innerText = val;
+                if (!state[id].locked) {
+                    state[id].locked = true; // Auto lock when manually selected
+                    updateLockUI(id);
+                }
             } else {
-                if (state[id].locked) toggleLock(id);
-                document.getElementById(`disp-${id}`).innerText = "...";
+                if (state[id].locked) {
+                    state[id].locked = false; // Auto unlock if set to random
+                    updateLockUI(id);
+                }
+                display.innerText = "...";
                 state[id].value = "...";
             }
         }
 
+        // Unlock All Button
         function unlockAll() {
             config.forEach(cfg => {
-                if(state[cfg.id].locked) toggleLock(cfg.id);
+                if(state[cfg.id].locked) {
+                    state[cfg.id].locked = false;
+                    updateLockUI(cfg.id);
+                }
                 document.getElementById(`select-${cfg.id}`).value = "random";
             });
         }
 
+        // Spin Logic
         function spinAll() {
             const btn = document.querySelector('.spin-btn');
             btn.disabled = true;
-            btn.innerHTML = "⏳ กุ๊กกิ๊ก...";
+            btn.innerHTML = "⏳ กุ๊กกิ๊ก กุ๊กกิ๊ก...";
             
-            // ซ่อนปุ่ม Copy และกล่องข้อความชั่วคราวขณะสุ่ม
+            // ซ่อนปุ่ม Copy ชั่วคราว
             document.getElementById('btnCopy').style.display = 'none';
             document.getElementById('copyArea').style.display = 'none';
             document.getElementById('finalSentence').style.display = 'block';
 
-            let active = config.filter(cfg => !state[cfg.id].locked);
-            if (active.length === 0) {
+            let activeSlots = config.filter(cfg => !state[cfg.id].locked);
+
+            if (activeSlots.length === 0) {
+                // ถ้าล็อกหมดทุกอัน ให้ข้ามไปสรุปเลย
                 finalizeSpin();
                 return;
             }
 
-            config.forEach((cfg, idx) => {
+            // Loop หมุนทีละอัน
+            config.forEach((cfg, index) => {
                 if (state[cfg.id].locked) return;
-                const disp = document.getElementById(`disp-${cfg.id}`);
+
+                const display = document.getElementById(`disp-${cfg.id}`);
                 const pool = cfg.data;
-                let count = 0;
-                let interval = setInterval(() => {
-                    disp.innerText = pool[Math.floor(Math.random() * pool.length)];
-                    count++;
-                    if (count > 15 + (idx * 5)) {
+                let counter = 0;
+                let speed = 50;
+                // ตั้งเวลาหยุดให้ไล่กันไป (Cascade effect)
+                let stopThreshold = 10 + (index * 4);
+
+                const interval = setInterval(() => {
+                    display.innerText = pool[Math.floor(Math.random() * pool.length)];
+                    counter++;
+
+                    if (counter > stopThreshold) {
                         clearInterval(interval);
-                        state[cfg.id].value = pool[Math.floor(Math.random() * pool.length)];
-                        disp.innerText = state[cfg.id].value;
+                        const finalVal = pool[Math.floor(Math.random() * pool.length)];
+                        display.innerText = finalVal;
+                        state[cfg.id].value = finalVal;
                     }
-                }, 50);
+                }, speed);
             });
 
-            setTimeout(() => finalizeSpin(), 50 * (15 + (config.length * 5)) + 200);
+            // คำนวณเวลาที่ใช้ทั้งหมดแล้วเปิดปุ่ม
+            const maxDelay = 50 * (10 + (config.length * 4)) + 300;
+            setTimeout(() => finalizeSpin(), maxDelay);
         }
 
         function finalizeSpin() {
             const btn = document.querySelector('.spin-btn');
             btn.disabled = false;
-            btn.innerHTML = "🎲 สุ่มเมนู (Spin)";
-            generateResult();
+            btn.innerHTML = "🎲 สุ่มเมนูฟิวชั่น (Spin)";
+            generateSentence();
         }
 
-        function generateResult() {
+        function generateSentence() {
             const v = {};
-            config.forEach(cfg => v[cfg.id] = state[cfg.id].value === "..." ? "สุ่มก่อน" : state[cfg.id].value);
+            config.forEach(cfg => v[cfg.id] = state[cfg.id].value === "..." ? "(สุ่มก่อน)" : state[cfg.id].value);
 
-            // แสดงผลสวยงาม
-            const html = `
-                🥘 <b>เมนู:</b> <span class="highlight">${v.country1}</span> x <span class="highlight">${v.country2}</span><br>
-                🥩 <b>วัตถุดิบ:</b> <span class="highlight">${v.meat}</span><br>
-                🔥 <b>สไตล์:</b> <span class="highlight">${v.style}</span><br>
-                ✨ <b>จัดจาน:</b> <span class="highlight">${v.plating}</span>
-            `;
-            document.getElementById('finalSentence').innerHTML = html;
+            // แสดงผล HTML สวยๆ
+            const sentenceHtml = `
+                🍲 <b>โจทย์ฟิวชั่นโลก:</b> นำวัฒนธรรมอาหารจาก <span class="highlight">"${v.country1}"</span> มาผสมผสานกับ <span class="highlight">"${v.country2}"</span><br>
+                🥩 โดยใช้วัตถุดิบหลักคือ <span class="highlight">"${v.meat}"</span><br>
+                🍳 ปรุงในรูปแบบ <span class="highlight">"${v.style}"</span><br>
+                🎨 และนำเสนอผ่านการจัดจานแบบ <span class="highlight">"${v.plating}"</span>`;
 
-            // สร้างข้อความสำหรับ Copy ใส่ใน Textarea
+            document.getElementById('finalSentence').innerHTML = sentenceHtml;
+
+            // เตรียมข้อความสำหรับ Copy
             const textToCopy = `🍳 โจทย์เมนูฟิวชั่นวันนี้ ✨\n\n` +
                 `🗺️ ${v.country1} + ${v.country2}\n` +
                 `🥩 วัตถุดิบ: ${v.meat}\n` +
                 `🥘 สไตล์: ${v.style}\n` +
                 `🎨 จัดจาน: ${v.plating}\n\n` +
-                `#FusionChallenge #KookKikKitchen`;
+                `#GlobalFusionKitchen #CookingChallenge`;
 
             const copyArea = document.getElementById('copyArea');
             copyArea.value = textToCopy;
-            copyArea.style.display = 'block'; // โชว์กล่องข้อความ
-            document.getElementById('btnCopy').style.display = 'flex'; // โชว์ปุ่ม Copy
+            copyArea.style.display = 'block';
+            document.getElementById('btnCopy').style.display = 'flex';
         }
 
         function copyText() {
-            const copyText = document.getElementById("copyArea");
+            const copyArea = document.getElementById("copyArea");
+            copyArea.select();
+            copyArea.setSelectionRange(0, 99999); // For mobile
             
-            // เลือกข้อความ
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); // สำหรับมือถือ
-
-            // สั่ง Copy
-            navigator.clipboard.writeText(copyText.value).then(() => {
+            navigator.clipboard.writeText(copyArea.value).then(() => {
                 showToast();
             });
         }
@@ -423,9 +517,9 @@
             setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
 
+        // Run
         init();
+
     </script>
 </body>
 </html>
-      
-   
